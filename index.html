@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>OTP Verification</title>
     <style>
-        *{
+        * {
             margin: 0;
             box-sizing: border-box;
         }
-        .container{
+        .container {
             height: 300px;
             width: 350px;
             color: #4cd137;
@@ -24,10 +24,8 @@
             border-radius: 15px;
             background-color: #2f3640;
             font-family: Arial, Helvetica, sans-serif;
-
         }
-
-        input{
+        input {
             width: 45px;
             height: 45px;
             margin: 18px 3px;
@@ -38,15 +36,12 @@
             text-align: center;
             color: #4cd137;
             background: transparent;
-
         }
-        a,p{
+        a, p {
             color: white;
         }
-        button{
-            padding: 10px;
-            padding-left: 30px;
-            padding-right: 30px;
+        button {
+            padding: 10px 30px;
             margin-top: 10px;
             background: transparent;
             border: 2px solid #4cd137;
@@ -54,40 +49,37 @@
             color: #4cd137;
             font-size: 18px;
         }
-
     </style>
 </head>
 <body>
     <div class="container">
         <h3>OTP VERIFICATION</h3>
         <div class="inp">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
-            <input type="text" maxlength="1">
+            <input type="text" maxlength="1" oninput="moveFocus(this)">
+            <input type="text" maxlength="1" oninput="moveFocus(this)">
+            <input type="text" maxlength="1" oninput="moveFocus(this)">
+            <input type="text" maxlength="1" oninput="moveFocus(this)">
         </div>
-        <p>Don't get the code?
-            <a href="">Resend</a>
-        </p>
+        <p>Don't get the code? <a href="">Resend</a></p>
         <button>Verify</button>
-
-
-
     </div>
 
-
     <script>
-        let input=[...document.querySelectorAll('input')];
-        console.log(input);
-        input.forEach(Element => {
-            Element.addEventListener('keyup',()=>{
-                if(input.indexOf(Element)+1 !=input.length)
-                    input[input.indexOf(Element)+1].focus()
-                //  };
-            });
-        });
-
-        
+        function moveFocus(current) {
+            const inputs = document.querySelectorAll('input');
+            const currentIndex = Array.from(inputs).indexOf(current);
+            
+            // Move to the next input if the current input is filled
+            if (current.value.length === 1 && currentIndex < inputs.length - 1) {
+                inputs[currentIndex + 1].focus();
+            }
+            // Move to the previous input if the current input is empty and not the first input
+            if (current.value.length === 0 && currentIndex > 0) {
+                inputs[currentIndex - 1].focus();
+            }
+            // Allow only numbers
+            // current.value = current.value.replace(/[^0-9]/g, '');
+        }
     </script>
 </body>
 </html>
